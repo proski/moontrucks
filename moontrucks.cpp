@@ -1,3 +1,5 @@
+#include "fleet.h"
+#include "unload_site.h"
 #include <iostream>
 
 void usage() {
@@ -7,20 +9,15 @@ void usage() {
             << "M: number of unload stations" << std::endl;
 }
 
-void run_model(const int truck_count, const int unloader_count) {
-  std::cout << "Number of trucks: " << truck_count << std::endl;
-  std::cout << "Number of unload stations: " << unloader_count << std::endl;
-  for (int i = 0; i < truck_count; ++i) {
-    std::cout << "Creating truck " << i << std::endl;
-  }
-  for (int i = 0; i < unloader_count; ++i) {
-    std::cout << "Creating unload station " << i << std::endl;
-  }
+void run_model(const int truck_count, const int station_count) {
+  std::cout << "Number of unload stations: " << station_count << std::endl;
+  Fleet fleet{truck_count};
+  UnloadSite unload_site{station_count};
 }
 
 int main(int argc, char *argv[]) {
   int truck_count = -1;
-  int unloader_count = -1;
+  int station_count = -1;
 
   std::cout << "Moon mining trucks simulator" << std::endl;
 
@@ -31,17 +28,17 @@ int main(int argc, char *argv[]) {
 
   try {
     truck_count = std::stoi(argv[1]);
-    unloader_count = std::stoi(argv[2]);
+    station_count = std::stoi(argv[2]);
   } catch (std::invalid_argument &e) {
     std::cerr << "Exception caught : " << e.what() << std::endl;
     return 2;
   }
 
-  if (truck_count < 0 || unloader_count < 0) {
+  if (truck_count < 0 || station_count < 0) {
     std::cerr << "Unsupported arguments" << std::endl;
     return 3;
   }
 
-  run_model(truck_count, unloader_count);
+  run_model(truck_count, station_count);
   return 0;
 }

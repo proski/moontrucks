@@ -15,12 +15,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Library for the core implementation
 add_library(MoonTrucks
-	moontrucks.cpp
 	event_queue.cpp
 )
 
 # The executable file
-add_executable(moontrucks runner.cpp)
+add_executable(moontrucks moontrucks.cpp)
 
 # Libraries for the executable file
 target_link_libraries(moontrucks PRIVATE MoonTrucks)

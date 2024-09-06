@@ -9,7 +9,7 @@ public:
 
   ~Truck() { std::cout << "Destroying truck " << _id << std::endl; }
 
-  int get_id() { return _id; };
+  int id() { return _id; };
 
 private:
   inline static int _next_id = 0;

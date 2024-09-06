@@ -1,25 +1,17 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "clock.h"
-#include <cstdlib>
-
 enum class EventType {
-  Mining,
-  TravelToMine,
-  TravelFromMine,
-  Unloading,
-  UnloadWait,
+  MiningComplete,
+  ArrivedToMine,
+  ArrivedToStations,
+  UnloadComplete,
 };
 
 class Event {
 public:
-  static Event mining() {
-    // The duration is random between 1 hour and 5 hours
-    Duration duration = 60.0 + (4 * 60.0 * rand() / RAND_MAX);
-    Instant instant = Clock::now() + duration;
-    return Event(EventType::Mining, instant);
-  }
+  Event(EventType event_type, int truck_id)
+      : _event_type(event_type), _truck_id(truck_id) {}
 
   Event(const Event &) = default;
   Event(Event &&) = default;
@@ -27,14 +19,12 @@ public:
   Event &operator=(Event &&other) = default;
   ~Event() = default;
 
-  Instant time() { return this->_time; }
+  EventType event_type() { return _event_type; }
+  int truck_id() { return _truck_id; }
 
 private:
-  EventType _event_type;
-  Instant _time;
-
-  Event(EventType event_type, Instant time)
-      : _event_type(event_type), _time(time) {}
+  const EventType _event_type;
+  const int _truck_id;
 };
 
 #endif // EVENT_H

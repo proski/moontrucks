@@ -1,5 +1,6 @@
 #include "fleet.h"
 #include "unload_site.h"
+#include <ctime>
 #include <iostream>
 
 void usage() {
@@ -10,9 +11,15 @@ void usage() {
 }
 
 void run_model(const int truck_count, const int station_count) {
+  srand(std::time(NULL));
+
   EventQueue event_queue;
   Fleet fleet{truck_count, event_queue};
   UnloadSite unload_site{station_count};
+
+  while (Clock::now() < Clock::hours(72)) {
+    event_queue.process_next_event();
+  }
 }
 
 int main(int argc, char *argv[]) {

@@ -13,6 +13,11 @@ public:
               << std::endl;
   }
 
+  // Rule of five - no copy
+  UnloadSite(const UnloadSite &) = delete;
+  UnloadSite(UnloadSite &&) = default;
+  UnloadSite &operator=(const UnloadSite &other) = delete;
+  UnloadSite &operator=(UnloadSite &&other) = default;
   ~UnloadSite() { std::cout << "Destroying unload site" << std::endl; }
 
   int get_station_count() { return _station_count; };

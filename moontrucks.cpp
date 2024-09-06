@@ -1,6 +1,4 @@
-#include "fleet.h"
-#include "unload_site.h"
-#include <ctime>
+#include "model.h"
 #include <iostream>
 
 void usage() {
@@ -8,18 +6,6 @@ void usage() {
             << "moontrucks N M" << std::endl
             << "N: number of trucks" << std::endl
             << "M: number of unload stations" << std::endl;
-}
-
-void run_model(const int truck_count, const int station_count) {
-  srand(std::time(NULL));
-
-  EventQueue event_queue;
-  Fleet fleet{truck_count, event_queue};
-  UnloadSite unload_site{station_count};
-
-  while (Clock::now() < Clock::hours(72)) {
-    event_queue.process_next_event();
-  }
 }
 
 int main(int argc, char *argv[]) {
@@ -46,6 +32,8 @@ int main(int argc, char *argv[]) {
     return 3;
   }
 
-  run_model(truck_count, station_count);
+  Model model{truck_count, station_count};
+  model.run_simulation();
+
   return 0;
 }

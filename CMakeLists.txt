@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 # Library for the core implementation
 add_library(MoonTrucks
-	event_queue.cpp
+	model.cpp
 )
 
 # The executable file

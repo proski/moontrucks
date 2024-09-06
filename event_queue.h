@@ -5,6 +5,7 @@
 #include "event.h"
 #include <iostream>
 #include <map>
+#include <utility>
 
 class EventQueue {
 public:
@@ -19,16 +20,14 @@ public:
 
   void insert(Event event, Instant time) { _queue.insert({time, event}); }
 
-  void process_next_event() {
-    const auto &first_element = _queue.begin();
-    if (first_element == _queue.end()) {
+  std::pair<Instant, Event> take_next_event() {
+    const auto &queue_start = _queue.begin();
+    if (queue_start == _queue.end()) {
       throw std::runtime_error("No more events, stopping simulation");
     }
-    auto [time, event] = *first_element;
-    _queue.erase(first_element);
-    std::cout << "Event time " << time << " type "
-              << static_cast<int>(event.event_type()) << " truck "
-              << event.truck_id() << std::endl;
+    std::pair<Instant, Event> first_event = *queue_start;
+    _queue.erase(queue_start);
+    return first_event;
   }
 
 private:

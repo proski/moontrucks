@@ -19,8 +19,6 @@ public:
       // The duration is random between 1 hour and 5 hours
       Duration duration =
           Clock::hours(1) + (Clock::hours(4) * rand() / RAND_MAX);
-      std::cout << "Event for truck " << truck->id() << " duration " << duration
-                << std::endl;
       event_queue.insert(event, Clock::now() + duration);
     }
   }

@@ -3,9 +3,9 @@
 
 enum class EventType {
   MiningComplete,
-  ArrivedToMine,
   ArrivedToStations,
   UnloadComplete,
+  ArrivedToMine,
 };
 
 class Event {

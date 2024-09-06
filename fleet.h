@@ -15,11 +15,8 @@ public:
       : _truck_count(truck_count), _trucks(truck_count) {
     std::cout << "Creating fleet of " << truck_count << " trucks" << std::endl;
     for (auto truck = _trucks.begin(); truck != _trucks.end(); ++truck) {
-      Event event = Event{EventType::MiningComplete, truck->id()};
-      // The duration is random between 1 hour and 5 hours
-      Duration duration =
-          Clock::hours(1) + (Clock::hours(4) * rand() / RAND_MAX);
-      event_queue.insert(event, Clock::now() + duration);
+      event_queue.insert(Event{EventType::ArrivedToMine, truck->id()},
+                         Clock::now());
     }
   }
 

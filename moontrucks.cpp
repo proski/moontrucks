@@ -10,8 +10,8 @@ void usage() {
 }
 
 void run_model(const int truck_count, const int station_count) {
-  std::cout << "Number of unload stations: " << station_count << std::endl;
-  Fleet fleet{truck_count};
+  EventQueue event_queue;
+  Fleet fleet{truck_count, event_queue};
   UnloadSite unload_site{station_count};
 }
 

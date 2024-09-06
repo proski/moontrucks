@@ -1,3 +1,6 @@
+#ifndef UNLOAD_SITE_H
+#define UNLOAD_SITE_H
+
 #include "station.h"
 #include <iostream>
 #include <vector>
@@ -18,3 +21,5 @@ private:
   const int _station_count;
   std::vector<Station> _stations;
 };
+
+#endif // UNLOAD_SITE_H

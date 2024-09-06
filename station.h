@@ -1,3 +1,6 @@
+#ifndef STATION_H
+#define STATION_H
+
 #include <iostream>
 
 class Station {
@@ -12,3 +15,5 @@ private:
   inline static int _next_id = 0;
   const int _id{_next_id++};
 };
+
+#endif // STATION_H

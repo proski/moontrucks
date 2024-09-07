@@ -18,11 +18,11 @@ public:
     srand(std::time(NULL));
   }
 
-  // Rule of five - no copy
+  // Rule of five - no copy or move.
   Model(const Model &) = delete;
-  Model(Model &&) = default;
+  Model(Model &&) = delete;
   Model &operator=(const Model &other) = delete;
-  Model &operator=(Model &&other) = default;
+  Model &operator=(Model &&other) = delete;
   ~Model() = default;
 
   void run_simulation();

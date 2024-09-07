@@ -7,11 +7,11 @@ class Truck {
 public:
   Truck() { std::cout << "Creating truck " << _id << std::endl; }
 
-  // Rule of five - copy and move allowed
+  // Rule of five - no copy or move.
   Truck(const Truck &) = delete;
-  Truck(Truck &&) = default;
+  Truck(Truck &&) = delete;
   Truck &operator=(const Truck &other) = delete;
-  Truck &operator=(Truck &&other) = default;
+  Truck &operator=(Truck &&other) = delete;
   ~Truck() { std::cout << "Destroying truck " << _id << std::endl; }
 
   int id() const { return _id; }

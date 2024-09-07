@@ -12,11 +12,11 @@ class Station {
 public:
   Station() { std::cout << "Creating station " << _id << std::endl; }
 
-  // Rule of five - copy and move allowed
-  Station(const Station &) = default;
-  Station(Station &&) = default;
-  Station &operator=(const Station &other) = default;
-  Station &operator=(Station &&other) = default;
+  // Rule of five - no copy or move.
+  Station(const Station &) = delete;
+  Station(Station &&) = delete;
+  Station &operator=(const Station &other) = delete;
+  Station &operator=(Station &&other) = delete;
   ~Station() { std::cout << "Destroying station " << _id << std::endl; }
 
   int id() const { return _id; }

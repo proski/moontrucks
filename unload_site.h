@@ -14,11 +14,11 @@ public:
               << std::endl;
   }
 
-  // Rule of five - no copy
+  // Rule of five - no copy or move.
   UnloadSite(const UnloadSite &) = delete;
-  UnloadSite(UnloadSite &&) = default;
+  UnloadSite(UnloadSite &&) = delete;
   UnloadSite &operator=(const UnloadSite &other) = delete;
-  UnloadSite &operator=(UnloadSite &&other) = default;
+  UnloadSite &operator=(UnloadSite &&other) = delete;
   ~UnloadSite() { std::cout << "Destroying unload site" << std::endl; }
 
   void queue_truck(Truck &truck, EventQueue &event_queue) {

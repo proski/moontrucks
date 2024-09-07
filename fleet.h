@@ -19,11 +19,11 @@ public:
     }
   }
 
-  // Rule of five - no copy
+  // Rule of five - no copy or move.
   Fleet(const Fleet &) = delete;
-  Fleet(Fleet &&) = default;
+  Fleet(Fleet &&) = delete;
   Fleet &operator=(const Fleet &other) = delete;
-  Fleet &operator=(Fleet &&other) = default;
+  Fleet &operator=(Fleet &&other) = delete;
   ~Fleet() { std::cout << "Destroying truck fleet" << std::endl; }
 
   Truck &truck(int truck_id) { return _trucks[truck_id]; }

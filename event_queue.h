@@ -10,14 +10,14 @@ class EventQueue {
 public:
   EventQueue() : _queue{} { std::cout << "Creating event queue" << std::endl; };
 
-  // Rule of five - no copy
+  // Rule of five - no copy or move.
   EventQueue(const EventQueue &) = delete;
-  EventQueue(EventQueue &&) = default;
+  EventQueue(EventQueue &&) = delete;
   EventQueue &operator=(const EventQueue &other) = delete;
-  EventQueue &operator=(EventQueue &&other) = default;
+  EventQueue &operator=(EventQueue &&other) = delete;
   ~EventQueue() { std::cout << "Destroying event queue" << std::endl; };
 
-  void insert(Event event, Instant time) { _queue.insert({time, event}); }
+  void insert(Event event, Instant time) { _queue.emplace(time, event); }
 
   std::pair<Instant, Event> take_next_event() {
     const auto &queue_start = _queue.begin();

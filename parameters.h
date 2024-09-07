@@ -1,5 +1,5 @@
 /*
- * Definitions of model paramaters that are not configurable at the run time.
+ * Definitions of model parameters that are not configurable at the run time.
  */
 
 #ifndef PARAMETERS_H

@@ -40,6 +40,7 @@ public:
   void release_truck(Truck &truck, EventQueue &event_queue) {
     Station &station = _stations[truck.station()];
     station.release_truck(truck, event_queue);
+    truck.release_from_station();
   }
 
 private:

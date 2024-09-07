@@ -45,4 +45,9 @@ void Model::run_simulation() {
   while (Clock::now() < SIMULATION_TIME) {
     process_next_event();
   }
+  for (int truck_id = 0; truck_id < _truck_count; ++truck_id) {
+    Truck &truck = _fleet.truck(truck_id);
+    std::cout << "Truck " << truck_id << " unloaded " << truck.unload_count()
+              << " time(s)" << std::endl;
+  }
 }

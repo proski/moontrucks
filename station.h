@@ -32,7 +32,7 @@ public:
     }
   }
 
-  void release_truck(Truck &truck, EventQueue &event_queue) {
+  void release_truck(const Truck &truck, EventQueue &event_queue) {
     int truck_id = _truck_queue.front();
     if (truck_id != truck.id()) {
       std::cerr << "First truck is line is " << truck_id << " but truck "

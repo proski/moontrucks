@@ -47,7 +47,7 @@ public:
     _last_event = Clock::now();
   }
 
-  void print_stats() {
+  void print_stats() const {
     std::cout << "Truck " << _id << ": unloaded " << _unload_count
               << " time(s), travel time " << _travel_time << ", queued time "
               << _queued_time << ", load time " << _load_time
@@ -58,6 +58,8 @@ private:
   inline static int _next_id{0};
   const int _id{_next_id++};
   int _station_id{NO_STATION};
+
+  // Stats
   int _unload_count{};
   Instant _last_event{Clock::now()};
   Duration _travel_time{};

@@ -49,8 +49,6 @@ void Model::run_simulation() {
   while (Clock::now() < SIMULATION_TIME) {
     process_next_event();
   }
-  for (int truck_id = 0; truck_id < _truck_count; ++truck_id) {
-    Truck &truck = _fleet.truck(truck_id);
-    truck.print_stats();
-  }
+  _fleet.print_stats();
+  _unload_site.print_stats();
 }

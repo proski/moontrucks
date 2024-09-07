@@ -40,6 +40,12 @@ public:
     truck.release_from_station();
   }
 
+  void print_stats() const {
+    for (const auto &station : _stations) {
+      station.print_stats();
+    }
+  }
+
 private:
   const int _station_count;
   std::vector<Station> _stations;

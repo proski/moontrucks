@@ -29,6 +29,7 @@ public:
     if (queue_empty) {
       event_queue.insert({EventType::UnloadComplete, truck.id()},
                          Clock::from_now(UNLOAD_TIME));
+      add_idle_time();
     }
   }
 
@@ -47,12 +48,36 @@ public:
       Truck &truck = fleet.truck(next_truck_id);
       truck.add_queued_time();
     }
+    ++_unload_count;
+    add_unload_time();
+  }
+
+  void add_idle_time() {
+    _idle_time += (Clock::now() - _last_event);
+    _last_event = Clock::now();
+  }
+
+  void add_unload_time() {
+    _unload_time += (Clock::now() - _last_event);
+    _last_event = Clock::now();
+  }
+
+  void print_stats() const {
+    std::cout << "Station " << _id << ": unloaded " << _unload_count
+              << " time(s), idle time " << _idle_time << ", unload time "
+              << _unload_time << std::endl;
   }
 
 private:
   inline static int _next_id{0};
   const int _id{_next_id++};
   std::queue<int> _truck_queue{};
+
+  // Stats
+  int _unload_count{};
+  Instant _last_event{Clock::now()};
+  Duration _idle_time{};
+  Duration _unload_time{};
 };
 
 #endif // STATION_H

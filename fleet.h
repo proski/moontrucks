@@ -25,6 +25,12 @@ public:
 
   Truck &truck(int truck_id) { return _trucks[truck_id]; }
 
+  void print_stats() const {
+    for (const auto &truck : _trucks) {
+      truck.print_stats();
+    }
+  }
+
 private:
   const int _truck_count;
   std::vector<Truck> _trucks;

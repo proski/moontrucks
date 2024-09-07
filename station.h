@@ -24,9 +24,10 @@ public:
   int queue_length() const { return _truck_queue.size(); }
 
   void enqueue_truck(Truck &truck, EventQueue &event_queue) {
+    bool queue_empty = queue_length() == 0;
     _truck_queue.push(truck.id());
     truck.set_station(_id);
-    if (queue_length() == 0) {
+    if (queue_empty) {
       event_queue.insert({EventType::UnloadComplete, truck.id()},
                          Clock::now() + UNLOAD_TIME);
     }

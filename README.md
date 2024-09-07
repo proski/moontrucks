@@ -9,6 +9,15 @@ Simulation for a lunar Helium-3 space mining operation.
 * cmake is used for build.
 * C++17 is used for the implementation.
 
+## Implementation details
+
+* An event queue is implemented as `std::multimap` indexed by simulated time.
+* The simulated time used type `double`.
+* When an event is processed, another event is added to the queue.
+* The simulated time is updated to the time of the current event.
+* Every event is associated with a truck. All trucks have an event associated
+with them unless they are waiting in queue at an unload station.
+
 ## Limitations and possible improvements
 
 * There is no fine grained logging.

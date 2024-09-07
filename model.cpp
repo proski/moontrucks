@@ -15,18 +15,21 @@ void Model::process_next_event() {
     std::cout << time << ": MiningComplete " << truck_id << std::endl;
     _event_queue.insert({EventType::ArrivedToStations, truck_id},
                         Clock::from_now(TRAVEL_TO_STATION));
+    truck.add_load_time();
     break;
   }
   case EventType::ArrivedToStations: {
     std::cout << time << ": ArrivedToStations " << truck_id << std::endl;
     _unload_site.queue_truck(truck, _event_queue);
+    truck.add_travel_time();
     break;
   }
   case EventType::UnloadComplete: {
     std::cout << time << ": UnloadComplete " << truck_id << std::endl;
-    _unload_site.release_truck(truck, _event_queue);
+    _unload_site.release_truck(truck, _fleet, _event_queue);
     _event_queue.insert({EventType::ArrivedToMine, truck_id},
                         Clock::from_now(TRAVEL_TO_MINE));
+    truck.add_unload_time();
     break;
   }
   case EventType::ArrivedToMine: {
@@ -36,6 +39,7 @@ void Model::process_next_event() {
                                            rand() / RAND_MAX);
     _event_queue.insert({EventType::MiningComplete, truck_id},
                         Clock::from_now(duration));
+    truck.add_travel_time();
     break;
   }
   }
@@ -47,7 +51,6 @@ void Model::run_simulation() {
   }
   for (int truck_id = 0; truck_id < _truck_count; ++truck_id) {
     Truck &truck = _fleet.truck(truck_id);
-    std::cout << "Truck " << truck_id << " unloaded " << truck.unload_count()
-              << " time(s)" << std::endl;
+    truck.print_stats();
   }
 }

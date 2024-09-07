@@ -34,9 +34,9 @@ public:
     _stations[best_station].enqueue_truck(truck, event_queue);
   };
 
-  void release_truck(Truck &truck, EventQueue &event_queue) {
+  void release_truck(Truck &truck, Fleet &fleet, EventQueue &event_queue) {
     Station &station = _stations[truck.station()];
-    station.release_truck(truck, event_queue);
+    station.release_truck(truck, fleet, event_queue);
     truck.release_from_station();
   }
 

@@ -32,7 +32,8 @@ public:
     }
   }
 
-  void release_truck(const Truck &truck, EventQueue &event_queue) {
+  void release_truck(const Truck &truck, Fleet &fleet,
+                     EventQueue &event_queue) {
     int truck_id = _truck_queue.front();
     if (truck_id != truck.id()) {
       std::cerr << "First truck is line is " << truck_id << " but truck "
@@ -40,9 +41,11 @@ public:
     }
     _truck_queue.pop();
     if (queue_length() > 0) {
-      truck_id = _truck_queue.front();
-      event_queue.insert({EventType::UnloadComplete, truck_id},
+      int next_truck_id = _truck_queue.front();
+      event_queue.insert({EventType::UnloadComplete, next_truck_id},
                          Clock::from_now(UNLOAD_TIME));
+      Truck &truck = fleet.truck(next_truck_id);
+      truck.add_queued_time();
     }
   }
 

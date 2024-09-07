@@ -21,6 +21,8 @@ by tracking states of trucks and stations.
 * Search for the shorted queue is O(m) whether m is the number of unload
 stations. It should be possible to use a faster algorithm.
 * The code could use `std::optional` in a some places.
+* `Clock` doesn't need to be a class. Moreover, it should be possible to use
+the `std::chrono` library for time conversion.
 
 ## Testing done
 

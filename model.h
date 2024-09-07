@@ -25,11 +25,7 @@ public:
   Model &operator=(Model &&other) = default;
   ~Model() = default;
 
-  void run_simulation() {
-    while (Clock::now() < Clock::hours(72)) {
-      process_next_event();
-    }
-  }
+  void run_simulation();
 
   void process_next_event();
 
@@ -39,7 +35,6 @@ private:
   UnloadSite _unload_site;
   const int _truck_count;
   const int _station_count;
-  int elapsed_time{0};
 };
 
 #endif // MODEL_H

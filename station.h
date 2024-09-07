@@ -4,10 +4,9 @@
 #include "clock.h"
 #include "event.h"
 #include "event_queue.h"
+#include "parameters.h"
 #include <iostream>
 #include <queue>
-
-const Duration UNLOAD_TIME = Clock::minutes(5);
 
 class Station {
 public:

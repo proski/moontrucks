@@ -18,8 +18,8 @@ public:
     _now = instant;
   }
 
-  static Duration hours(int hours) { return 60.0 * hours; }
-  static Duration minutes(int minutes) { return 1.0 * minutes; }
+  static constexpr Duration hours(int hours) { return 60.0 * hours; }
+  static constexpr Duration minutes(int minutes) { return 1.0 * minutes; }
 
 private:
   Clock() {}

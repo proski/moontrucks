@@ -1,10 +1,7 @@
 #include "model.h"
 #include "clock.h"
-
-const Duration MINING_TIME_MIN = Clock::hours(1);
-const Duration MINING_TIME_MAX = Clock::hours(5);
-const Duration TRAVEL_TO_MINE = Clock::minutes(30);
-const Duration TRAVEL_TO_STATION = Clock::minutes(30);
+#include "parameters.h"
+#include <iostream>
 
 void Model::process_next_event() {
   auto [time, event] = _event_queue.take_next_event();
@@ -41,5 +38,11 @@ void Model::process_next_event() {
                         Clock::now() + duration);
     break;
   }
+  }
+}
+
+void Model::run_simulation() {
+  while (Clock::now() < SIMULATION_TIME) {
+    process_next_event();
   }
 }

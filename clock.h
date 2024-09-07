@@ -9,7 +9,8 @@ typedef double Instant;
 
 class Clock {
 public:
-  static Instant now() { return _now; };
+  static Instant now() { return _now; }
+  static Instant from_now(Duration duration) { return now() + duration; }
 
   static void set_time(Instant instant) {
     if (instant < _now) {

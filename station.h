@@ -28,7 +28,7 @@ public:
     truck.set_station(_id);
     if (queue_empty) {
       event_queue.insert({EventType::UnloadComplete, truck.id()},
-                         Clock::now() + UNLOAD_TIME);
+                         Clock::from_now(UNLOAD_TIME));
     }
   }
 
@@ -42,7 +42,7 @@ public:
     if (queue_length() > 0) {
       truck_id = _truck_queue.front();
       event_queue.insert({EventType::UnloadComplete, truck_id},
-                         Clock::now() + UNLOAD_TIME);
+                         Clock::from_now(UNLOAD_TIME));
     }
   }
 

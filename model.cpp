@@ -14,7 +14,7 @@ void Model::process_next_event() {
   case EventType::MiningComplete: {
     std::cout << time << ": MiningComplete " << truck_id << std::endl;
     _event_queue.insert({EventType::ArrivedToStations, truck_id},
-                        Clock::now() + TRAVEL_TO_STATION);
+                        Clock::from_now(TRAVEL_TO_STATION));
     break;
   }
   case EventType::ArrivedToStations: {
@@ -26,7 +26,7 @@ void Model::process_next_event() {
     std::cout << time << ": UnloadComplete " << truck_id << std::endl;
     _unload_site.release_truck(truck, _event_queue);
     _event_queue.insert({EventType::ArrivedToMine, truck_id},
-                        Clock::now() + TRAVEL_TO_MINE);
+                        Clock::from_now(TRAVEL_TO_MINE));
     break;
   }
   case EventType::ArrivedToMine: {
@@ -35,7 +35,7 @@ void Model::process_next_event() {
     Duration duration = MINING_TIME_MIN + ((MINING_TIME_MAX - MINING_TIME_MIN) *
                                            rand() / RAND_MAX);
     _event_queue.insert({EventType::MiningComplete, truck_id},
-                        Clock::now() + duration);
+                        Clock::from_now(duration));
     break;
   }
   }

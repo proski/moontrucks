@@ -8,14 +8,14 @@
 
 class EventQueue {
 public:
-  EventQueue() : _queue{} { std::cout << "Creating event queue" << std::endl; };
+  EventQueue() = default;
 
   // Rule of five - no copy or move.
   EventQueue(const EventQueue &) = delete;
   EventQueue(EventQueue &&) = delete;
   EventQueue &operator=(const EventQueue &other) = delete;
   EventQueue &operator=(EventQueue &&other) = delete;
-  ~EventQueue() { std::cout << "Destroying event queue" << std::endl; };
+  ~EventQueue() = default;
 
   void insert(Event event, Instant time) { _queue.emplace(time, event); }
 
@@ -31,7 +31,6 @@ public:
 
 private:
   std::multimap<Instant, Event> _queue;
-  Event get_next_event();
 };
 
 #endif // EVENT_QUEUE_H

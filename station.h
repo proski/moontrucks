@@ -10,14 +10,14 @@
 
 class Station {
 public:
-  Station() { std::cout << "Creating station " << _id << std::endl; }
+  Station() {}
 
   // Rule of five - no copy or move.
   Station(const Station &) = delete;
   Station(Station &&) = delete;
   Station &operator=(const Station &other) = delete;
   Station &operator=(Station &&other) = delete;
-  ~Station() { std::cout << "Destroying station " << _id << std::endl; }
+  ~Station() = default;
 
   int id() const { return _id; }
   int queue_length() const { return _truck_queue.size(); }

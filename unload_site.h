@@ -9,17 +9,14 @@
 class UnloadSite {
 public:
   UnloadSite(int station_count)
-      : _station_count(station_count), _stations(station_count) {
-    std::cout << "Creating unload site of " << station_count << " stations"
-              << std::endl;
-  }
+      : _station_count(station_count), _stations(station_count) {}
 
   // Rule of five - no copy or move.
   UnloadSite(const UnloadSite &) = delete;
   UnloadSite(UnloadSite &&) = delete;
   UnloadSite &operator=(const UnloadSite &other) = delete;
   UnloadSite &operator=(UnloadSite &&other) = delete;
-  ~UnloadSite() { std::cout << "Destroying unload site" << std::endl; }
+  ~UnloadSite() = default;
 
   void queue_truck(Truck &truck, EventQueue &event_queue) {
     bool initial = true;

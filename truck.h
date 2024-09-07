@@ -8,14 +8,14 @@ constexpr int NO_STATION = -1;
 
 class Truck {
 public:
-  Truck() { std::cout << "Creating truck " << _id << std::endl; }
+  Truck() {}
 
   // Rule of five - no copy or move.
   Truck(const Truck &) = delete;
   Truck(Truck &&) = delete;
   Truck &operator=(const Truck &other) = delete;
   Truck &operator=(Truck &&other) = delete;
-  ~Truck() { std::cout << "Destroying truck " << _id << std::endl; }
+  ~Truck() = default;
 
   int id() const { return _id; }
   int station() const { return _station_id; }

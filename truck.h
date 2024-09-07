@@ -14,11 +14,14 @@ public:
   Truck &operator=(Truck &&other) = default;
   ~Truck() { std::cout << "Destroying truck " << _id << std::endl; }
 
-  int id() { return _id; };
+  int id() const { return _id; }
+  int station() const { return _station_id; }
+  void set_station(int station_id) { _station_id = station_id; }
 
 private:
-  inline static int _next_id = 0;
+  inline static int _next_id{0};
   const int _id{_next_id++};
+  int _station_id{0};
 };
 
 #endif // TRUCK_H

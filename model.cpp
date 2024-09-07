@@ -8,27 +8,26 @@ const Duration TRAVEL_TO_STATION = Clock::minutes(30);
 
 void Model::process_next_event() {
   auto [time, event] = _event_queue.take_next_event();
+  Clock::set_time(time);
   EventType event_type = event.event_type();
   int truck_id = event.truck_id();
-  Clock::set_time(time);
+  Truck &truck = _fleet.truck(truck_id);
 
   switch (event_type) {
   case EventType::MiningComplete: {
     std::cout << time << ": MiningComplete " << truck_id << std::endl;
-    EventType next_event_type = EventType::ArrivedToStations;
-    Event next_event{next_event_type, truck_id};
-    Instant next_event_time = Clock::now() + TRAVEL_TO_STATION;
-    _event_queue.insert(next_event, next_event_time);
+    _event_queue.insert({EventType::ArrivedToStations, truck_id},
+                        Clock::now() + TRAVEL_TO_STATION);
     break;
   }
   case EventType::ArrivedToStations: {
     std::cout << time << ": ArrivedToStations " << truck_id << std::endl;
-    //_unload_site.queue_truck(truck_id);
+    _unload_site.queue_truck(truck, _event_queue);
     break;
   }
   case EventType::UnloadComplete: {
     std::cout << time << ": UnloadComplete " << truck_id << std::endl;
-    //_unload_site.release_truck(truck_id);
+    _unload_site.release_truck(truck, _event_queue);
     _event_queue.insert({EventType::ArrivedToMine, truck_id},
                         Clock::now() + TRAVEL_TO_MINE);
     break;

@@ -1,7 +1,6 @@
 #ifndef EVENT_QUEUE_H
 #define EVENT_QUEUE_H
 
-#include "clock.h"
 #include "event.h"
 #include <iostream>
 #include <map>
@@ -32,7 +31,6 @@ public:
 
 private:
   std::multimap<Instant, Event> _queue;
-  int elapsed_time{0};
   Event get_next_event();
 };
 

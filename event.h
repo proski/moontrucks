@@ -20,8 +20,8 @@ public:
   Event &operator=(Event &&other) = default;
   ~Event() = default;
 
-  EventType event_type() { return _event_type; }
-  int truck_id() { return _truck_id; }
+  EventType event_type() const { return _event_type; }
+  int truck_id() const { return _truck_id; }
 
 private:
   const EventType _event_type;

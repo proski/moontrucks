@@ -12,10 +12,7 @@ class Model {
 public:
   Model(int truck_count, int station_count)
       : _truck_count(truck_count), _station_count(station_count),
-        _event_queue(), _fleet(truck_count, _event_queue),
-        _unload_site(station_count) {
-    std::cout << "Initializing model" << std::endl;
-
+        _fleet(truck_count, _event_queue), _unload_site(station_count) {
     // Seed random number generator with the current time to have different
     // results for every run.
     srand(std::time(NULL));
@@ -37,7 +34,7 @@ public:
   void process_next_event();
 
 private:
-  EventQueue _event_queue;
+  EventQueue _event_queue{};
   Fleet _fleet;
   UnloadSite _unload_site;
   const int _truck_count;
